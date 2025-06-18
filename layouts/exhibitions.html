@@ -1,0 +1,57 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+  </header>
+  <div class="post-content">
+    {{ .Content }}
+    
+    <h2>展示一覧（合計{{ len site.Data.exhibitions }}件）</h2>
+    
+    {{/* 年のリストを作成 */}}
+    {{ $years := slice }}
+    {{ range site.Data.exhibitions }}
+      {{ $years = $years | append .year }}
+    {{ end }}
+    {{ $uniqueYears := sort ($years | uniq) "value" "desc" }}
+    
+    <div class="exhibitions-list">
+      {{ range $uniqueYears }}
+        {{ $currentYear := . }}
+        {{ $yearExhibitions := where site.Data.exhibitions "year" $currentYear }}
+        {{ $count := len $yearExhibitions }}
+        
+        <h3 style="margin-top: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #333;">
+          {{ $currentYear }}年（{{ $count }}件）
+        </h3>
+        
+        {{/* 同じ年内では月順（降順）でソート */}}
+        {{ $sortedExhibitions := sort $yearExhibitions "month" "desc" }}
+        
+        {{ range $sortedExhibitions }}
+        <div class="exhibition-item" style="margin-bottom: 1.5rem; margin-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+          <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">{{ .title }}</h4>
+          <div style="color: #666; margin-bottom: 0.5rem;">
+            {{ .month }}月 | {{ .venue }}
+          </div>
+          <div style="margin-bottom: 0.5rem; font-size: 0.9rem;">
+            <strong>アーティスト:</strong> {{ .artist }} | 
+            <strong>ジャンル:</strong> {{ .genre }}
+          </div>
+          {{ if ne .memo "" }}
+          <div style="margin-bottom: 0.5rem; font-size: 0.9rem;">
+            <strong>メモ:</strong> {{ .memo }}
+          </div>
+          {{ end }}
+          {{ if ne .url "" }}
+          <div>
+            <a href="{{ .url }}" target="_blank" rel="noopener" style="font-size: 0.9rem;">🔗 公式サイト・展示情報</a>
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</article>
+{{ end }}

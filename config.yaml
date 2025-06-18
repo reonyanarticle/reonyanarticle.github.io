@@ -1,0 +1,37 @@
+baseURL: "https://reonyanarticle.github.io/"
+title: "吉田智哉 / Tomoya YOSHIDA"
+theme: "PaperMod"
+defaultContentLanguage: "ja"
+timeout: 10000
+
+params:
+  profileMode:
+    enabled: false
+  ShowReadingTime: false
+  ShowShareButtons: false
+  ShowPostNavLinks: false
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: false
+  ShowToc: false
+  displayFullLangName: true
+  ShowWordCount: false
+  UseHugoToc: false
+  comments: false
+  homeInfoParams:
+    Title: "吉田智哉 / Tomoya YOSHIDA"
+    Content: "自然言語処理まわりの研究開発を取り組むエンジニア"
+
+menu:
+  main:
+    - identifier: profile
+      name: プロフィール
+      url: /
+      weight: 10
+    - identifier: exhibitions
+      name: 芸術鑑賞履歴
+      url: /exhibitions/
+      weight: 20
+    - identifier: github
+      name: GitHub
+      url: https://github.com/reonyanarticle
+      weight: 30
