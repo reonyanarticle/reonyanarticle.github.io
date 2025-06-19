@@ -21,6 +21,8 @@ params:
   ShowCredit: false
   author: ""
   homeInfoParams:
+    Title: "吉田智哉 / Tomoya YOSHIDA"
+    Content: "自然言語処理まわりの研究開発を取り組むエンジニア"
 
 menu:
   main:
